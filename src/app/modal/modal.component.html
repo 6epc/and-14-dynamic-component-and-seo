@@ -1,11 +1,11 @@
 <div class="backdrop"></div>
 
-<div class="modal">
+<div class="modal" [class.open]="isOpen">
   <nav class="navbar">
     <h1>{{ title }}</h1>
   </nav>
 
   <p [innerHtml]="text"></p>
 
-  <button class="btn" (click)="close.emit()">Close</button>
+  <button class="btn" (click)="closeModal()">Close</button>
 </div>

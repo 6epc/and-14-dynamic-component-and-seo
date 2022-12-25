@@ -19,7 +19,8 @@ export class ModalDirective {
     modal.instance.title = this.modalDataInput.title;
     modal.instance.text = this.modalDataInput.text;
     modal.instance.close.subscribe(() => {
-      this.viewContainerRef.clear();
+      modal.destroy();
+      // or this.viewContainerRef.clear();
     });
   }
 }
