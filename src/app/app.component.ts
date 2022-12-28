@@ -1,5 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Type, ViewChild, ViewContainerRef } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
+import { AsideNavComponent } from './aside-nav/aside-nav.component';
 import { ModalComponent } from './modal/modal.component';
 import { modalData, ModalDirective } from './modal/modal.directive';
 
@@ -10,6 +11,9 @@ import { modalData, ModalDirective } from './modal/modal.directive';
 })
 export class AppComponent {
   @ViewChild(ModalDirective) refModalDirctive!: ModalDirective;
+  @ViewChild('container', { read: ViewContainerRef }) container!: ViewContainerRef;
+
+  isDisabled = false;
 
   modalData: modalData = {
     title: 'This is a title',
@@ -23,10 +27,12 @@ export class AppComponent {
   }
 
   modalComponent = ModalComponent;
+  asideNav = AsideNavComponent;
 
   constructor(
     private title: Title,
-    private meta: Meta
+    private meta: Meta,
+    public viewContainerRef: ViewContainerRef
   ) {
     this.title.setTitle('Dynamic component and SEO opt.');
     this.meta.addTags([
@@ -37,5 +43,18 @@ export class AppComponent {
 
   showModal(): void {
     this.refModalDirctive.showModal();
+  }
+
+  createComponent(component: Type<any>) {
+    this.container.clear();
+
+    const asideComp = this.container.createComponent(component);
+
+    this.isDisabled = true;
+
+    asideComp.instance.close.subscribe(() => {
+      asideComp.destroy();
+      this.isDisabled = false;
+    })
   }
 }

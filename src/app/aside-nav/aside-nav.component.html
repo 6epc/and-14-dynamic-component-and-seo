@@ -1,0 +1,17 @@
+<div class="aside" [class.open]="isOpen">
+  <div class="flex">
+    <h1>Aside Component</h1>
+    <button
+      class="btn"
+      (click)="closeAside()">x</button>
+  </div>
+
+  <div class="flex m-t-32">
+    <button class="btn narrow" (click)="createComponent(asideChildOne)">Show nav child one</button>
+    <button class="btn narrow" (click)="createComponent(asideChildTwo)">Show nav child two</button>
+  </div>
+
+  <ng-template #container></ng-template>
+</div>
+
+<div class="backdrop" (click)="closeAside()"></div>
