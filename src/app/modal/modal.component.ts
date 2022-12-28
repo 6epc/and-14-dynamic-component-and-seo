@@ -12,9 +12,7 @@ export class ModalComponent implements OnInit {
   text = '';
   @Output() close = new EventEmitter<void>();
 
-  constructor(@Inject(PLATFORM_ID) private platformId: any) {
-
-  }
+  constructor(@Inject(PLATFORM_ID) private platformId: any) {}
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
@@ -22,7 +20,6 @@ export class ModalComponent implements OnInit {
         this.isOpen = true;
       }, 0);
     }
-
   }
 
   closeModal() {

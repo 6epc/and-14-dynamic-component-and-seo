@@ -32,7 +32,7 @@ p {
   margin: 1.2rem 0;
 }
 
-ul {
+ul, ol {
   list-style-position: inside;
 }
 
@@ -48,9 +48,12 @@ img {
   font-size: 1rem;
   border: none;
   cursor: pointer;
-  margin-right: 0.5rem;
   transition: opacity 0.2s ease-in;
   outline: none;
+
+  &:not(:last-child) {
+    margin-right: 0.5rem;
+  }
 
   &:disabled {
     background: #ccc;
@@ -60,6 +63,10 @@ img {
 
   &:hover {
     opacity: 0.8;
+  }
+
+  &.narrow {
+    line-height: 1;
   }
 }
 
@@ -151,4 +158,58 @@ hr {
     padding: 0.45rem;
     margin: 0 0.25rem;
   }
+}
+
+$sizes: 8, 16, 32;
+
+@each $size in $sizes {
+  .m-r-#{$size} {
+    margin-right: #{$size}px;
+  }
+
+  .m-b-#{$size} {
+    margin-bottom: #{$size}px;
+  }
+
+  .m-l-#{$size} {
+    margin-left: #{$size}px;
+  }
+
+  .m-t-#{$size} {
+    margin-top: #{$size}px;
+  }
+}
+
+.aside-child {
+  width: 360px;
+  padding: 20px;
+  background-color: white;
+  overflow: hidden;
+  display: block;
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  right: 0;
+  transform: translate(100%, 0);
+  transition: all .4s;
+  z-index: 1020;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, .1);
+
+  &.open {
+    transform: translate(0, 0);
+  }
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0, 0, .3);
 }
